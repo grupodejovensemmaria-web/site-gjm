@@ -58,7 +58,7 @@ def register():
 
 <p>Olá {form.nome_completo.data},</p>
 
-<p>Estamos entrando em contato para informar que sua conta está disponível na plataforma do GJ:</p>
+<p>Estamos entrando em contato para informar que sua conta está disponível na plataforma do GJM:</p>
 
 <p>- Website: https://gj-guadalupe.onrender.com</p>
 

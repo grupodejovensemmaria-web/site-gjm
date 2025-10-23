@@ -64,7 +64,7 @@ def obter_titulo_ato(ato_numero):
         4: "Maria",
         5: "Pentecostes",
         6: "Nossa Senhora de Guadalupe",
-        7: "GJ Guadalupe",
+        7: "GJM Guadalupe",
         8: "Venha ser de Deus",
         9: "Tua graça me basta",
         10: "Sou estrangeiro aqui, o céu é meu lar"
@@ -92,17 +92,17 @@ def obter_descricao_ato(ato_numero):
 <p>Entre os séculos e continentes, a Mãe de Deus continua a visitar seus filhos. Em 1531, em Guadalupe, ela se manifesta como mulher do povo, com rosto indígena, vestida de céu.</p>
 <p>No Brasil, ela se faz presente nas comunidades simples, nas igrejas vivas, nas festas populares e no carinho materno do povo. Aqui em Vila Velha, a presença de Nossa Senhora de Guadalupe renova a fé, a pertença e a missão. Ela caminha conosco.</p>""",
         7: """<p><blockquote>“Jovens, não tenham medo! Aceitem o convite da Igreja e de Cristo Senhor!” (Papa Leão XIV)</blockquote></p>
-<p>Inspirados por Maria e movidos pelo Espírito, jovens se organizam, se unem e constroem comunidade. A família GJ nasce da necessidade de escutar da Palavra e servir a Deus com criatividade, alegria e coragem.</p>
+<p>Inspirados por Maria e movidos pelo Espírito, jovens se organizam, se unem e constroem comunidade. A família GJM nasce da necessidade de escutar da Palavra e servir a Deus com criatividade, alegria e coragem.</p>
 <p>Não somos espectadores da fé, mas protagonistas de um novo tempo.</p>""",
         8: """<p><blockquote>“Vinde a mim todos vós que estais cansados e sobrecarregados.” (Mt 11,28)</blockquote></p>
 <p>A fé cristã não é imposição, mas convite. Um chamado suave, constante e insistente à conversão, à comunhão, à vida em plenitude. Aqui, os jovens de 18 a 29 anos são convidados a dar um passo a mais.</p>
-<p>Não é uma campanha, mas um apelo pessoal: tua graça me basta. Jesus estende a mão. A família GJ estende o coração. Você é esperado(a), como está.</p>""",
+<p>Não é uma campanha, mas um apelo pessoal: tua graça me basta. Jesus estende a mão. A família GJM estende o coração. Você é esperado(a), como está.</p>""",
         9: """<p><blockquote>“Basta-te a minha graça, pois é na fraqueza que se revela a minha força.” (2Cor 12,9)</blockquote></p>
 <p>Esse versículo não é um lema decorativo – é uma experiência espiritual profunda. Em meio às fragilidades, doenças, limitações e quedas, a graça de Deus se mostra suficiente.</p>
 <p>O verdadeiro milagre é permanecer firme, mesmo fraco. É essa graça que sustenta a caminhada, reacende a fé, renova o ânimo. Aqui, há espaço para a oração pessoal, o silêncio fecundo e o encontro íntimo com o Senhor.</p>""",
         10: """<p><blockquote>“Lutai para entrar pela porta estreita...” (Lc 13,24)</blockquote></p>
 <p>A história não termina na terra. A vocação última da humanidade é a eternidade. Rumo ao céu, caminhamos com os olhos fixos em Cristo.</p>
-<p>A fé cristã não é alienação, mas esperança viva. A juventude que evangeliza também é aquela que sonha com o céu – não como fuga, mas como destino. Juntos queremos celebrar a promessa final: um novo tempo, onde Deus será tudo em todos.</p><p>A família GJ lhe espera para caminharmos juntos nessa jornada.</p>"""
+<p>A fé cristã não é alienação, mas esperança viva. A juventude que evangeliza também é aquela que sonha com o céu – não como fuga, mas como destino. Juntos queremos celebrar a promessa final: um novo tempo, onde Deus será tudo em todos.</p><p>A família GJM lhe espera para caminharmos juntos nessa jornada.</p>"""
     }
     return descricoes.get(ato_numero, "")
 
