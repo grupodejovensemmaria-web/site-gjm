@@ -1,0 +1,63 @@
+.main-content {
+    min-height: 80vh;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: var(--background-card);
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* Calendário */
+.calendar {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.calendar h2 {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.mes-bloco {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 colunas para meses */
+    gap: 1.5rem;
+}
+
+.dia-bloco {
+    background-color: var(--background-soft);
+    border: 1px solid var(--border-color);
+    padding: var(--spacing-unit);
+    border-radius: 0.5rem;
+}
+
+.dia-bloco strong {
+    display: block;
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.aniversariante-card {
+    background-color: var(--background-card);
+    padding: var(--spacing-unit);
+    margin-top: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    transition: background-color 0.3s ease;
+}
+
+.aniversariante-card:hover {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+.aniversariante-card p {
+    margin: 0;
+    font-size: 1rem;
+}

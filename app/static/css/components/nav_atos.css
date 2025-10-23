@@ -1,0 +1,194 @@
+/* Reset for ato sections */
+.ato-section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  scroll-snap-align: start;
+}
+
+/* Container for all ato content */
+.ato-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat;
+}
+
+/* Base styles for all content elements */
+.ato-title-card,
+.ato-quote,
+.ato-image,
+.ato-video,
+.ato-text-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Title card styles */
+.ato-title-card {
+  z-index: 5;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  text-align: center;
+  padding: 2rem;
+}
+
+.ato-title-card h2 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+/* Quote styles */
+.ato-quote {
+  z-index: 4;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.ato-quote blockquote {
+  font-size: 1.5rem;
+  color: white;
+  max-width: 80%;
+  text-align: center;
+  font-style: italic;
+  padding: 2rem;
+  border-left: 4px solid var(--accent-color);
+}
+
+/* Background image styles */
+.ato-image {
+  z-index: 3;
+  background-size: cover;
+  background-position: center;
+}
+
+/* Video styles */
+.ato-video {
+  z-index: 2;
+  background-color: black;
+}
+
+.ato-video video,
+.ato-video img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Text content styles */
+.ato-text-content {
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+.ato-text-content h3 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.ato-text-content p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Navigation buttons */
+.ato-nav-buttons {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  gap: 1rem;
+}
+
+.nav-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  cursor: pointer;
+  backdrop-filter: blur(5px);
+  transition: all 0.3s ease;
+}
+
+.nav-btn:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+/* Active states for each view */
+.ato-container.show-title .ato-title-card,
+.ato-container.show-quote .ato-quote,
+.ato-container.show-image .ato-image,
+.ato-container.show-video .ato-video,
+.ato-container.show-text .ato-text-content {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .ato-title-card h2 {
+    font-size: 2rem;
+  }
+  
+  .ato-quote blockquote {
+    font-size: 1.2rem;
+  }
+  
+  .ato-text-content {
+    padding: 1rem;
+  }
+  
+  .ato-text-content h3 {
+    font-size: 1.5rem;
+  }
+  
+  .ato-text-content p {
+    font-size: 1rem;
+  }
+  
+  .nav-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+}
+
+/* 🎭 Cores de fundo por Ato */
+#ato-0  { background-color: var(--ato-0-color); }
+#ato-1  { background-color: var(--ato-1-color); }
+#ato-2  { background-color: var(--ato-2-color); }
+#ato-3  { background-color: var(--ato-3-color); }
+#ato-4  { background-color: var(--ato-4-color); }
+#ato-5  { background-color: var(--ato-5-color); }
+#ato-6  { background-color: var(--ato-6-color); }
+#ato-7  { background-color: var(--ato-7-color); }
+#ato-8  { background-color: var(--ato-8-color); }
+#ato-9  { background-color: var(--ato-9-color); }
+#ato-10 { background-color: var(--ato-10-color); color: var(--primary-color); }
+
+/* Efeitos suaves de transição entre atos */
+.ato-section {
+  transition: background-color 1s ease-in-out;
+}

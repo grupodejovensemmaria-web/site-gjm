@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pages/home.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/components/nav_atos.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pages/weekly_post.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pages/liturgia.css') }}">
+{% endblock %}
+
+{% block js %}
+<script src="{{ url_for('static', filename='js/modules/home.js') }}" defer></script>
+<script src="{{ url_for('static', filename='js/modules/nav_atos.js') }}" defer></script>
+<script src="{{ url_for('static', filename='js/modules/liturgia.js') }}" defer></script>
+<script src="{{ url_for('static', filename='js/modules/weekly_post.js') }}" defer></script>
+{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section - Ato 0 (Entrada) -->
+<section class="hero" id="ato-0">
+  <div class="hero-content">
+    <img src="{{ url_for('static', filename='images/logo.png') }}" 
+         alt="Logo GJ Guadalupe" class="hero-logo">
+    <h1 class="hero-title">Tua graça me basta</h1>
+    <p class="hero-subtitle">Uma jornada pela história da salvação</p>
+    
+    <div class="hero-buttons">
+      <a href="#ato-1" class="btn btn-primary start-journey" id="start-journey">Conhecer Deus</a>
+      <a id="liturgiadiaria-btn" class="btn btn-primary">Ver Liturgia Diária</a>
+      <a id="show-weekly-post-btn" class="btn btn-primary">Ver Santo da Semana</a>
+      <a href="/login" class="btn btn-outline">Venha ser de Deus</a>
+    </div>
+  </div>
+
+</section>
+
+<section class="weekly-post-section" id="weekly-post">
+    <div class="container">
+        <h2 class="section-title">Santo da Semana</h2>
+        <div id="weekly-post-content" class="weekly-post-card">
+            <!-- Conteúdo será carregado via JavaScript -->
+            <div class="loading">Carregando santo da semana...</div>
+        </div>
+        <div class="weekly-post-actions">
+            <button id="close-weekly-post-btn" class="btn btn-secondary">Fechar</button>
+        </div>
+    </div>
+</section>
+
+<!-- Ato Sections -->
+{% for ato in range(1, 11) %}
+<section class="ato-section" id="ato-{{ ato }}" data-ato="{{ ato }}">
+</section>
+
+<section class="liturgia-section" id="liturgia-diaria" class="hidden">
+    <div class="container">
+        <div class="liturgia-header">
+            <h2 class="liturgia-title">Liturgia do Dia</h2>
+            <div class="liturgia-date-cor">
+                <span id="liturgia-data"></span>
+                <span id="liturgia-cor" class="cor-badge"></span>
+            </div>
+        </div>
+        
+        <div class="liturgia-content">
+            <div class="liturgia-card">
+                <h3 id="liturgia-titulo"></h3>
+                
+                <div class="liturgia-oracoes">
+                    <h4>Orações</h4>
+                    <div class="oracao-item">
+                        <h5>Coleta</h5>
+                        <p id="liturgia-coleta"></p>
+                    </div>
+                    <div class="oracao-item">
+                        <h5>Oferendas</h5>
+                        <p id="liturgia-oferendas"></p>
+                    </div>
+                    <div class="oracao-item">
+                        <h5>Comunhão</h5>
+                        <p id="liturgia-comunhao"></p>
+                    </div>
+                </div>
+                
+                <div class="liturgia-leituras">
+                    <h4>Leituras</h4>
+                    <div class="leitura-item">
+                        <h5>Primeira Leitura</h5>
+                        <div id="liturgia-primeira"></div>
+                    </div>
+                    <div class="leitura-item">
+                        <h5>Salmo</h5>
+                        <div id="liturgia-salmo"></div>
+                    </div>
+                    <div class="leitura-item" id="segunda-leitura-container">
+                        <h5>Segunda Leitura</h5>
+                        <div id="liturgia-segunda"></div>
+                    </div>
+                    <div class="leitura-item">
+                        <h5>Evangelho</h5>
+                        <div id="liturgia-evangelho"></div>
+                    </div>
+                </div>
+                
+                <div class="liturgia-antifonas">
+                    <h4>Antífonas</h4>
+                    <div class="antifona-item">
+                        <h5>Entrada</h5>
+                        <p id="liturgia-antifona-entrada"></p>
+                    </div>
+                    <div class="antifona-item">
+                        <h5>Comunhão</h5>
+                        <p id="liturgia-antifona-comunhao"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="liturgia-actions">
+            <button id="close-liturgia-btn" class="btn btn-secondary">Fechar</button>
+        </div>
+    </div>
+</section>
+
+{% endfor %}
+{% endblock %}

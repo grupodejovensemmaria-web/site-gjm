@@ -1,0 +1,36 @@
+<header class="main-header" id="main-header">
+    <div class="header-container">
+
+        <div class="brand">
+            <a href="/index">GJ - GUADALUPE</a>
+        </div>
+
+        <nav class="main-nav">
+            <ul>
+                {% if current_user.is_authenticated %}
+                    {% if session.user.cargo == 'admin' %}
+                        <li><a href="/usuarios" title="Ir para painel de usuarios">USERS</a></li>
+                        <li><a href="/manage_weekly_post">SANTO DA SEMANA</a></li>
+                    {% endif %}
+                    <li><a href="/eventos" title="Ir para eventos">EVENTOS</a></li>
+                    <li><a href="/membros" title="Ir para membros">MEMBROS</a></li>
+                    <li><a href="/perfil" title="Ir para perfil do sistema">Perfil</a></li>
+                    <li><a href="/logout" title="Deslogar do sistema">Sair</a></li>
+                {% else %}
+                    <li><a href="/login" title="Realizar Login">Login</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+
+        <div class="header-intro">
+            {% if current_user.is_authenticated %}
+                <h2 class="dashboard-title">Olá, {{ session.user.username }} 👋</h2>
+                <p class="dashboard-subtext">Seja bem-vindo de volta à plataforma do GJ - GUADALUPE.</p>
+            {% else %}
+                <h2 class="public-title">Entre para mais recursos</h2>
+                <p class="public-subtext">Crie uma conta ou faça login para ter acesso completo ao sistema.</p>
+            {% endif %}
+        </div>
+
+    </div>
+</header>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Grupo de Jovens em Maria - Paróquia Nossa Senhora de Guadalupe - Arquidiocese de Vitória, Área pastoral">
+    <meta name="keywords" content="grupo de jovens, paróquia, nossa senhora de guadalupe, arquidiocese de vitória, área pastoral">
+    <meta name="author" content="Grupo de Jovens em Maria - Paróquia Nossa Senhora de Guadalupe">
+    <meta property="og:title" content="Grupo de Jovens em Maria - Paróquia Nossa Senhora de Guadalupe">
+    <meta property="og:description" content="Grupo de Jovens em Maria - Paróquia Nossa Senhora de Guadalupe">
+    <meta property="og:image" content="{{ url_for('static', filename='images/logo.jpg') }}">
+    <meta property="og:url" content="{{ request.url }}">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Grupo de Jovens em Maria - Paróquia Nossa Senhora de Guadalupe">
+    <meta name="twitter:description" content="Grupo de Jovens em Maria - Paróquia Nossa Senhora de Guadalupe">
+    <meta name="twitter:image" content="{{ url_for('static', filename='images/logo.jpg') }}">
+    <title> GJ_GUADALUPE | {% block title %} HOME {% endblock %}</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='images/logo.jpg') }}">
+    <link rel="apple-touch-icon" href="{{ url_for('static', filename='images/logo.jpg') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/logo.jpg') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/components/header.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/components/form.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/components/footer.css') }}">
+    {% block css %}{% endblock %}
+</head>
+<body>
+    
+    {% include 'components/header.html' %}
+    
+    <main class="main-content">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        
+        {% block content %}{% endblock %}
+    </main>
+    
+    {% include 'components/footer.html' %}
+    
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    {% block js %}{% endblock %}
+
+</body>
+</html>

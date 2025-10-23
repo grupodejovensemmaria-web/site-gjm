@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% from "macros/cards.jinja2" import info_card %}
+
+{% block title %}Meu Perfil{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pages/perfil.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="profile-container">
+
+    <!-- Seção de Informações -->
+    <section class="profile-section">
+        <h2 class="section-title">Minhas Informações</h2>
+
+        <div class="profile-grid">
+            {{ info_card(
+                title="Dados Pessoais",
+                items=[
+                    ('Nome completo', user.nome_completo or 'Não informado'),
+                    ('Nascimento', user.data_nascimento or 'Não informado'),
+                    ('Telefone principal', user.telefone or 'Não informado'),
+                    ('Instagram', user.instagram or 'Não informado'),
+                    ('Email', user.email),
+                    ('Contato de Emergência', user.contato_emergencia or 'Não informado'),
+                    ('Endereço', user.endereco or 'Não informado'),
+                ]
+            ) }}
+
+            {{ info_card(
+                title="Acesso",
+                items=[
+                    ('Usuário', user.username),
+                    ('Cargo', user.cargo),
+                    ('Status', 'Ativo'),
+                    ('Web Plataforma', 'Sim'),
+                    ('API', 'Sim' if user.acesso_api else 'Não')
+                ]
+            ) }}
+        </div>
+    </section>
+
+    <!-- Seção de Histórico -->
+    <section class="history-section">
+        <h2 class="section-title">Meu Histórico</h2>
+        
+        <div class="history-list">
+            {% for log in logs %}
+                {% include 'components/log-card.html' %}
+            {% endfor %}
+        </div>
+    </section>
+    
+{% endblock %}
+
+{% block js %}
+<script src="{{ url_for('static', filename='js/modules/perfil.js') }}"></script>
+{% endblock %}

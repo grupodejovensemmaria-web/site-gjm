@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %} MEMBROS {% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pages/membro_aniversariante.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="tab-pane active" id="aniversariantes">
+  <h2 class="text-xl mb-4">Aniversariantes</h2>
+  <div class="calendar">
+    {% for mes, dias in aniversariantes.items() %}
+      <h2>{{ mes }}</h2>
+      <div class="mes-bloco">
+        {% for dia, lista in dias.items() %}
+          <div class="dia-bloco">
+            <strong>{{ dia/mes }}:</strong>
+            {% for user in lista %}
+              <div class="aniversariante-card">
+                <p>{{ user.nome_completo }}</p>
+                <p>{{ user.data_nascimento }}</p>
+              </div>
+            {% endfor %}
+          </div>
+        {% endfor %}
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+
+{% endblock %}

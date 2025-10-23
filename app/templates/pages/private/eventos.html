@@ -1,0 +1,187 @@
+{% extends "base.html" %}
+
+{% block title %}EVENTOS{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pages/eventos.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="admin-container">
+    <h1>PAINEL - EVENTOS</h1>
+
+    <div class="tabs">
+        <button class="tab-btn active" data-tab="info">Eventos</button>
+        <button class="tab-btn" data-tab="criar_atualizar_remover">Atualizar / Criar / Remover eventos</button>
+    </div>
+
+    <div class="tab-content">
+        <div class="tab-pane active" id="info">
+            <h2>Eventos Marcados</h2>
+            <div id="lista-eventos">
+                {% for evento in eventos %}
+                <div class="evento-card" style="border: 1px solid var(--border-color); padding: var(--spacing-unit); margin-bottom: 1rem;">
+                    <h3>{{ evento.nome }}</h3>
+                    <p><strong>Data:</strong> {{ evento.data_evento.strftime('%d/%m/%Y %H:%M') }}</p>
+                    <p><strong>Local:</strong> {{ evento.local_evento }}</p>
+                    <button class="btn-secundario" data-evento_id="{{ evento.id }}" data-nome="{{ evento.nome }}" data-data_evento="{{ evento.data_evento }}" data-local_evento="{{ evento.local_evento }}" data-descricao="{{ evento.descricao }}" data-publico_alvo="{{ evento.publico_alvo }}" data-observacoes="{{ evento.observacoes }}" data-presencas='{{ evento.presencas | tojson | safe }}' onclick="abrirModal(this)">Mais informações</button>
+                </div>
+                {% else %}
+                <p>Nenhum evento cadastrado.</p>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="tab-pane" id="criar_atualizar_remover">
+            <h2>Criar | Atualizar | Remover - Eventos</h2>
+            <form id="form-evento" method="POST" action="/eventos_alterar">
+                <!-- Seleção da Ação -->
+                <div class="form-group">
+                    <label for="tipo_acao">O que deseja fazer?</label>
+                    <select name="tipo_acao" id="tipo_acao" class="input-style" required>
+                        <option value="" disabled selected>Selecione uma opção</option>
+                        <option value="criar">Criar novo evento</option>
+                        <option value="atualizar">Atualizar evento existente</option>
+                        <option value="remover">Remover evento</option>
+                    </select>
+                </div>
+
+                <!-- Bloco CRIAR (visível por padrão para exemplo) -->
+                <div id="bloco-criar" class="bloco-acao" style="display: none;">
+                    <div class="form-group">
+                        <label for="nome">Nome do Evento:</label>
+                        <input type="text" id="nome" name="nome" class="input-style">
+                    </div>
+                    <div class="form-group">
+                        <label for="data">Data:</label>
+                        <input type="datetime-local" id="data" name="data" class="input-style">
+                    </div>
+                    <div class="form-group">
+                        <label for="local">Local:</label>
+                        <input type="text" id="local" name="local" class="input-style">
+                    </div>
+                    <div class="form-group">
+                        <label for="recorrencia">Recorrência:</label>
+                        <select name="recorrencia" id="recorrencia" class="input-style">
+                            <option value="unica">Apenas uma vez</option>
+                            <option value="semanal">Semanal</option>
+                            <option value="mensal">Mensal</option>
+                            <option value="anual">Anual</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="descricao">Descrição:</label>
+                        <textarea id="descricao" name="descricao" class="input-style"></textarea>
+                    </div>
+                    <input type="hidden" name="publico_alvo" value="membros do GJ">
+                    <div class="form-group">
+                        <label for="observacoes">Observações:</label>
+                        <textarea id="observacoes" name="observacoes" class="input-style"></textarea>
+                    </div>
+                </div>
+
+                <!-- Bloco ATUALIZAR (hidden inicialmente) -->
+                <div id="bloco-atualizar" class="bloco-acao" style="display: none;">
+                    <div class="form-group">
+                        <label for="evento_id">Selecione o evento:</label>
+                            <select name="evento_id" id="evento_id" onchange="preencherCampos(this)">
+                                <option value="" selected>Selecione o evento</option>
+                                {% for evento in eventos %}
+                                    <option
+                                        value="{{ evento.id }}"
+                                        data-nome="{{ evento.nome }}"
+                                        data-data="{{ evento.data_evento }}"
+                                        data-local="{{ evento.local_evento }}"
+                                        data-recorrencia="{{ evento.recorrencia }}"
+                                        data-descricao="{{ evento.descricao }}"
+                                        data-observacoes="{{ evento.observacoes }}"
+                                        data-publico="{{ evento.publico_alvo }}"
+                                    >
+                                        {{ evento.nome }} ({{ evento.data_evento }})
+                                    </option>
+                                {% endfor %}
+                            </select>
+                    </div>
+                    <!-- Campos de atualização (podem ser os mesmos do "criar") -->
+                    <div class="form-group">
+                        <label for="novo_nome">Novo Nome:</label>
+                        <input type="text" id="novo_nome" name="novo_nome" value="" class="input-style">
+                    </div>
+                    <div class="form-group">
+                        <label for="nova_data">Nova data:</label>
+                        <input type="datetime-local" id="nova_data" name="nova_data" value="" class="input-style">
+                    </div>
+                    <div class="form-group">
+                        <label for="novo_local">Novo local:</label>
+                        <input type="text" id="novo_local" name="novo_local" value="" class="input-style">
+                    </div>
+                    <div class="form-group">
+                        <label for="nova_recorrencia">Nova recorrência:</label>
+                        <select name="nova_recorrencia" id="nova_recorrencia" value="" class="input-style">
+                            <option value="unica">Apenas uma vez</option>
+                            <option value="semanal">Semanal</option>
+                            <option value="mensal">Mensal</option>
+                            <option value="anual">Anual</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="nova_descricao">Nova descrição:</label>
+                        <textarea id="nova_descricao" value="" name="nova_descricao" class="input-style"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="novas_observacoes">Novas observações:</label>
+                        <textarea id="novas_observacoes" value="" name="novas_observacoes" class="input-style"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="novo_publico_alvo">Novo público alvo:</label>
+                        <input type="text" id="novo_publico_alvo" value="" name="novo_publico_alvo" class="input-style">
+                    </div>
+                </div>
+
+                <!-- Bloco REMOVER (hidden inicialmente) -->
+                <div id="bloco-remover" class="bloco-acao" style="display: none;">
+                    <div class="form-group">
+                        <label for="evento_id_remover">Selecione o evento para remover:</label>
+                        <select name="evento_id_remover" id="evento_id_remover" class="input-style">
+                            {% for evento in eventos %}
+                            <option value="{{ evento.id }}">{{ evento.nome }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-primary">Confirmar</button>
+            </form>
+        </div>
+
+    </div>
+
+</div>
+
+<div id="modal-info" class="modal hidden">
+    <div class="modal-content">
+        <span class="close-modal" onclick="fecharModal()">&times;</span>
+        <h2 id="modal-titulo"></h2>
+        <p><strong>Data:</strong> <span id="modal-data"></span></p>
+        <p><strong>Local:</strong> <span id="modal-local"></span></p>
+        <p><strong>Descrição:</strong> <span id="modal-descricao"></span></p>
+        <p><strong>Público Alvo:</strong> <span id="modal-publico"></span></p>
+        <p><strong>Observações:</strong> <span id="modal-observacoes"></span></p>
+
+        <!-- Nova Seção: Lista de Presença -->
+        <hr>
+        <h3>Lista de Presença</h3>
+        <ol id="modal-lista-presenca"></ol>
+        <button id="confirmar-presenca-btn" onclick="confirmarPresenca()">Confirmar Presença</button>
+        <button id="remover-presenca-btn" onclick="removerPresenca()">Remover Presença</button>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block js %}
+<script src="{{ url_for('static', filename='js/modules/eventos.js') }}"></script>
+<script src="{{ url_for('static', filename='js/modules/confirms_events.js') }}">
+</script>
+
+{% endblock %}

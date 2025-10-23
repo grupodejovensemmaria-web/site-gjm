@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}Gerenciar Santo da Semana{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pages/weekly_post.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="admin-container">
+    <h1>Gerenciar Santo da Semana</h1>
+
+    {% if current_post %}
+
+    <div class="current-post-card">
+        <h2>Santo Atual:</h2>
+        <div class="current-post-content">
+            <h3>{{ current_post.title }}</h3>
+            <h4>{{ current_post.subtitle }}</h4>
+            <img src="{{ url_for('static', filename='images/weekly_posts/' ~ current_post.image_path) }}" alt="{{ current_post.title }}" class="current-post-image">
+            <div class="post-text">{{ current_post.content | safe }}</div>
+            <p class="post-meta">Publicado por {{ current_post.author }} em {{ current_post.created_at }}</p>
+        </div>
+    </div>
+    {% endif %}
+    
+    <form method="POST" enctype="multipart/form-data" class="weekly-post-form">
+        <h2>Alterar Santo da Semana</h2>
+        
+        <div class="form-group">
+            <label for="title">Título:</label>
+            <input type="text" id="title" name="title" required class="form-control">
+        </div>
+        
+        <div class="form-group">
+            <label for="subtitle">Subtítulo:</label>
+            <input type="text" id="subtitle" name="subtitle" required class="form-control">
+        </div>
+        
+        <div class="form-group">
+            <label for="image">Imagem:</label>
+            <input type="file" id="image" name="image" accept="image/*" required class="form-control">
+            <small class="form-text">Formatos aceitos: PNG, JPG, JPEG. Tamanho máximo: 5MB.</small>
+        </div>
+        
+        <div class="form-group">
+            <label for="content">Conteúdo:</label>
+            <textarea id="content" name="content" rows="10" required class="form-control"></textarea>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Publicar</button>
+    </form>
+</div>
+{% endblock %}

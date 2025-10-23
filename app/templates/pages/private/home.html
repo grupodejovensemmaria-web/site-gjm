@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pages/home.css') }}">
+{% endblock %}
+
+{% block content %}
+
+{% set title_hero = "Grupo de Jovens - Paróquia Nossa Senhora de Guadalupe" %}
+{% set subtitle_hero = "Arquidiocese de Vitória - Área Pastoral de Vila Velha" %}
+{% include 'components/hero-card.html' %}
+
+<section class="content-section">
+    <div class="content-container">
+        <h2 class="content-title">Seja bem-vindo(a)!</h2>
+        <p class="content-description">
+            Nosso grupo de jovens acontece <strong>toda sexta-feira</strong>, logo após a <strong>Santa Missa das 18h30</strong>, na Paróquia Nossa Senhora de Guadalupe. <br><br>
+            Jovens entre <strong>18 e 29 anos</strong> são mais do que convidados: são chamados a viver momentos de fé, amizade e missão conosco. <br><br>
+            Venha fazer parte dessa caminhada com Cristo e com Maria!
+        </p>
+    </div>
+</section>
+
+<section class="hero-section">
+    <div class="hero-content" style="background-color: rgba(0,0,0,0.55); padding: 4rem 2rem; border-radius: 1rem;">
+        <h2 class="hero-title" style="color: #fff;">"A tua graça me basta!"</h2>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block js %}
+<script src="{{ url_for('static', filename='js/modules/home.js') }}"></script>
+{% endblock %}

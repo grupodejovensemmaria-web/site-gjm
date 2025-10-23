@@ -1,0 +1,145 @@
+:root {
+  /* 🌿 Identidade Visual GJM (Studio Interpres Design) */
+  --primary-color: #06484E;       /* Azul profundo - fé, confiança */
+  --secondary-color: #065A5E;     /* Verde-mariano - esperança */
+  --accent-color: #B9924E;        /* Dourado luz - divino, mariano */
+  --background-color: #FCEAD0;    /* Bege suave - acolhimento */
+  --text-color: #06484E;          /* Texto principal - azul da marca */
+  --text-dark: #896834;           /* Texto secundário - terroso */
+  --text-light: #FCEAD0;          /* Texto claro - uso sobre fundo escuro */
+  --border-color: #896834;
+  --background-soft: #FFF9F2;
+  --background-card: #FCEAD0;
+  --dark-color: #06484E; /* Azul profundo - cor de base para header e footer */
+
+
+  /* 💬 Cores de status */
+  --success-color: #4CAF50;
+  --danger-color: #C62828;
+  --warning-color: #E0A800;
+  --info-color: #065A5E;
+
+  /* 🎛️ Botões */
+  --btn-primary-bg: var(--primary-color);
+  --btn-primary-text: #FFFFFF;
+  --btn-secondary-bg: transparent;
+  --btn-secondary-text: var(--primary-color);
+  --btn-hover-bg: var(--accent-color);
+  --btn-hover-text: #FFFFFF;
+
+  /* 🌙 Modal e efeitos */
+  --modal-bg: rgba(0, 0, 0, 0.5);
+  --modal-content-bg: var(--background-card);
+  --shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+  --radius: 12px;
+
+  /* 🕊️ Transições */
+  --transition-fast: 0.2s ease;
+  --transition-medium: 0.4s ease;
+  --transition-slow: 0.7s ease;
+
+  /* 📏 Espaçamento base */
+  --spacing-unit: 1rem;
+
+  /* 💫 ATOS - cores temáticas GJM */
+  --ato-0-color: #06484E;   /* Ato 0 – Entrada: o chamado (azul profundo) */
+  --ato-1-color: #065A5E;   /* Ato 1 – Criação: vida e esperança */
+  --ato-2-color: #C62828;   /* Ato 2 – Queda: dor e redenção */
+  --ato-3-color: #B9924E;   /* Ato 3 – Reconciliação: ouro da graça */
+  --ato-4-color: #FCEAD0;   /* Ato 4 – Maria: luz e pureza */
+  --ato-5-color: #896834;   /* Ato 5 – Espírito: sabedoria e missão */
+  --ato-6-color: #065A5E;   /* Ato 6 – Guadalupe: esperança e consagração */
+  --ato-7-color: #F59E0B;   /* Ato 7 – Juventude: alegria e movimento */
+  --ato-8-color: #AD1457;   /* Ato 8 – Convite: amor e entrega */
+  --ato-9-color: #37474F;   /* Ato 9 – Graça: contemplação e mistério */
+  --ato-10-color: #FFFFFF;  /* Ato 10 – Céu: plenitude e eternidade */
+}
+
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+body {
+    font-family: 'Fredoka', sans-serif; /* Exemplo: Fredoka como mais fácil */
+    font-weight: bold;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--background-color);
+}
+
+label {
+    font-weight: bold;
+    color: var(--text-dark);
+}
+
+.main-content {
+    min-height: 80vh;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: var(--background-card);
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* Utilitários */
+.text-center { text-align: center; }
+.mt-1 { margin-top: 0.5rem; }
+.mt-2 { margin-top: 1rem; }
+.mb-2 { margin-bottom: 1rem; }
+
+.hidden {
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Estilos para botões */
+.btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 0.25rem;
+}
+
+.btn-primary {
+    background-color: var(--btn-primary-bg);
+    color: var(--btn-primary-text);
+    border: 2px solid var(--btn-primary-bg);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}

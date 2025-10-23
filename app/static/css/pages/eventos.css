@@ -1,0 +1,217 @@
+/* Container das abas */
+.tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: var(--spacing-unit);
+  flex-wrap: wrap;
+}
+
+/* Botões das abas */
+.tab-btn {
+  padding: 0.6rem 1.2rem;
+  background-color: var(--background-soft);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  border-radius: 999px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+
+.tab-btn:hover {
+  background-color: var(--primary-color);
+  color: var(--btn-primary-text);
+  transform: scale(1.03);
+}
+
+/* Aba ativa */
+.tab-btn.active {
+  background-color: var(--primary-color);
+  color: var(--btn-primary-text);
+  border-color: var(--primary-color);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+/* Conteúdo das abas */
+.tab-pane {
+  display: none;
+  padding-top: 1rem;
+}
+
+.tab-pane.active {
+  display: block;
+}
+
+.input-style {
+    width: 100%;
+    padding: 0.5rem;
+    margin: 0.5rem 0;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-family: inherit;
+}
+
+.btn-primary {
+    background-color: var(--btn-primary-bg);
+    color: var(--btn-primary-text);
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: var(--accent-color);
+}
+
+.evento-card {
+    background-color: var(--background-card);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.btn-secundario {
+    background-color: var(--btn-secondary-bg);
+    color: var(--btn-secondary-text);
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-weight: 500;
+    box-shadow: var(--shadow);
+    transition: background-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.btn-secundario:hover {
+    background-color: #2FC58C; /* tom mais escuro do verde */
+    transform: scale(1.03);
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--modal-bg);
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+
+/* Modal ativo */
+.modal.show {
+    display: flex;
+}
+
+/* Conteúdo do modal com estilo "card moderno" */
+.modal-content {
+    background-color: var(--modal-content-bg);
+    padding: 2rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    width: 100%;
+    max-width: 600px;
+    color: var(--text-color);
+    animation: fadeInUp 0.3s ease;
+}
+
+/* Animação suave */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Botão de fechar */
+.close-modal {
+    float: right;
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: var(--text-light);
+    transition: color var(--transition-fast), transform var(--transition-fast);
+}
+
+.close-modal:hover {
+    color: var(--danger-color);
+    transform: scale(1.2);
+}
+
+/* Tipografia interna do modal */
+.modal-content h2 {
+    margin-top: 0;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+}
+
+.modal-content p {
+    margin: 0.6rem 0;
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+.modal-content p strong {
+    color: var(--text-dark);
+}
+
+/* Lista de presença */
+#modal-lista-presenca {
+  padding-left: 1.2rem;
+  margin-bottom: var(--spacing-unit);
+  color: var(--text-dark);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* Botões */
+#confirmar-presenca-btn,
+#remover-presenca-btn {
+  cursor: pointer;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: background-color var(--transition-fast), transform var(--transition-fast);
+  margin-right: 0.5rem;
+  user-select: none;
+  font-weight: 600;
+  min-width: 140px;
+}
+
+/* Confirmar presença (primário) */
+#confirmar-presenca-btn {
+  background-color: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
+}
+
+#confirmar-presenca-btn:hover,
+#confirmar-presenca-btn:focus {
+  background-color: #140937; /* tom mais escuro do primary */
+  transform: scale(1.05);
+  outline: none;
+}
+
+/* Remover presença (danger) */
+#remover-presenca-btn {
+  background-color: var(--danger-color);
+  color: #fff;
+}
+
+#remover-presenca-btn:hover,
+#remover-presenca-btn:focus {
+  background-color: #b91c1c; /* tom mais escuro do danger */
+  transform: scale(1.05);
+  outline: none;
+}
+

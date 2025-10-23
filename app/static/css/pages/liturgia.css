@@ -1,0 +1,125 @@
+.liturgia-section {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--modal-bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 2rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition-medium);
+}
+
+.liturgia-section.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.liturgia-section .container {
+    background-color: var(--background-card);
+    border-radius: var(--radius);
+    padding: 2rem;
+    max-width: 800px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: var(--shadow);
+    position: relative;
+}
+
+.liturgia-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.liturgia-title {
+    color: var(--primary-color);
+    font-size: 1.8rem;
+}
+
+.liturgia-date-cor {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.cor-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.liturgia-content {
+    margin-bottom: 1.5rem;
+}
+
+.liturgia-card {
+    background-color: var(--background-soft);
+    padding: 1.5rem;
+    border-radius: var(--radius);
+}
+
+.liturgia-titulo {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+}
+
+.liturgia-oracoes,
+.liturgia-leituras,
+.liturgia-antifonas {
+    margin-bottom: 1.5rem;
+}
+
+.liturgia-oracoes h4,
+.liturgia-leituras h4,
+.liturgia-antifonas h4 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.oracao-item,
+.leitura-item,
+.antifona-item {
+    margin-bottom: 1rem;
+}
+
+.oracao-item h5,
+.leitura-item h5,
+.antifona-item h5 {
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+.oracao-item p,
+.antifona-item p {
+    line-height: 1.6;
+}
+
+.leitura-item div p {
+    margin-bottom: 0.5rem;
+}
+
+.liturgia-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Cores para as diferentes cores litúrgicas */
+.cor-roxo { background-color: #6A1B9A; color: white; }
+.cor-branco { background-color: #FFFFFF; color: var(--text-dark); border: 1px solid var(--border-color); }
+.cor-verde { background-color: #2E7D32; color: white; }
+.cor-vermelho { background-color: #C62828; color: white; }
+.cor-rosa { background-color: #AD1457; color: white; }

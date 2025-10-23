@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %} MEMBROS {% endblock %}
+
+{% block content %}
+
+<h2 class="text-xl mb-4">Conta</h2>
+<form id="formAtualizaConta" class="space-y-4">
+  <div>
+    <label>Username</label>
+    <input type="text" name="username" value="{{ usuarios.username }}" class="input" />
+  </div>
+  <div>
+    <label>Email</label>
+    <input type="email" name="email" value="{{ usuarios.email }}" class="input" />
+  </div>
+  <div>
+    <label>Nova Senha</label>
+    <input type="password" name="senha_nova" class="input" />
+  </div>
+  <button class="btn btn-primary">Salvar Alterações</button>
+</form>
+<button onclick="removerConta()" class="btn btn-danger mt-4">Excluir Conta</button>
+
+{% endblock %}
+
+{% block js %}
+
+<script>
+function removerConta() {
+  if (confirm("Tem certeza que deseja excluir sua conta?")) {
+    fetch(`/usuarios/{{ usuarios.username }}`, {
+      method: 'DELETE',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({tipo: 'privado'})
+    }).then(res => res.json()).then(res => {
+      if (res.success) {
+        alert('Conta removida. Você será deslogado.');
+        window.location.href = '/logout';
+      } else {
+        alert(res.message);
+      }
+    });
+  }
+}
+</script>
+
+{% endblock %}

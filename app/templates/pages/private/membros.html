@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+
+{% block title %}MEMBROS{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pages/membros.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="admin-container">
+    <h1>PAINEL - MEMBROS</h1>
+
+    <div class="tabs">
+        <button class="tab-btn active" data-tab="aniversariantes">Aniversariantes</button>
+        <button class="tab-btn" data-tab="info">Informacional</button>
+        <button class="tab-btn" data-tab="att_info">Atualizar informações / Remover contar</button>
+    </div>
+
+    <div class="tab-content">
+        <div class="tab-pane active" id="aniversariantes">
+          <h2 class="text-xl mb-4">Aniversariantes</h2>
+          <div class="calendar">
+            {% for mes, dias in aniversariantes.items() %}
+              <h2>{{ mes }}</h2>
+              <div class="mes-bloco">
+                {% for dia, lista in dias.items() %}
+                  <div class="dia-bloco">
+                    <strong>{{ dia }}</strong>
+                    {% for user in lista %}
+                      <div class="aniversariante-card">
+                        <p>{{ user.nome_completo }}</p>
+                        <p>{{ user.data_nascimento }}</p>
+                      </div>
+                    {% endfor %}
+                  </div>
+                {% endfor %}
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+        <div class="tab-pane" id="info">
+            <h2 class="text-xl mb-4">Informações dos Membros</h2>
+            <div class="membro-grid">
+                {% for user in usuario %}
+                    {% if user.nome_completo %}
+                        <div class="membro-card">
+                            <h3>{{ user.nome_completo }}</h3>
+                            <p>📍 <strong>Endereço:</strong> {{ user.endereco }}</p>
+                            <p>📞 <strong>Telefone:</strong> {{ user.telefone }}</p>
+                            <p>🚨 <strong>Emergência:</strong> {{ user.contato_emergencia }}</p>
+                            <p>📧 <strong>Email:</strong> {{ user.email }}</p>
+                            <p>📷 <strong>Instagram:</strong> {{ user.instagram }}</p>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="tab-pane" id="att_info">
+
+            <h2 class="text-xl mb-4">Minha Conta | {{ session.user.username }}</h2>
+            <form id="formAtualizaConta" class="space-y-4">
+              <div>
+                <input type="hidden" name="user" value="{{ session.user.username }}">
+                <label>Nome completo</label>
+                <input type="text" name="nome_completo" value="{{ logado.nome_completo }}" class="input" />
+                
+                <label>Email</label>
+                <input type="email" name="email" value="{{ logado.email }}" class="input" />
+                
+                <label>Telefone</label>
+                <input type="text" name="telefone" value="{{ logado.telefone }}" class="input" />
+                
+                <label>Contato de emergência</label>
+                <input type="text" name="emergencia" value="{{ logado.contato_emergencia }}" class="input" />
+                
+                <label>Instagram</label>
+                <input type="text" name="instagram" value="{{ logado.instagram }}" class="input" />
+
+                <label>Endereço</label>
+                <input type="text" name="endereco" value="{{ logado.endereco }}" class="input" />
+                
+                <label>Data nascimento</label>
+                <input type="date" name="nascimento" value="{{ logado.data_nascimento }}" class="input" />
+                
+                <label>Nova Senha</label>
+                <input type="password" name="senha_nova" class="input" />
+              </div>
+              <button type="submit" class="btn btn-primary">✅ Salvar Alterações</button>
+            </form>
+
+            <button onclick="removerConta()" class="btn btn-danger mt-4">🗑️ Excluir Minha Conta</button>
+
+        </div>
+    </div>
+
+</div>
+
+<div id="detalheModal" class="modal" style="display: none;"></div>
+
+{% endblock %}
+
+{% block js %}
+<script src="{{ url_for('static', filename='js/modules/membros.js') }}"></script>
+<script src="{{ url_for('static', filename='js/modules/atualizar_info.js') }}"></script>
+<script>
+function removerConta() {
+  if (confirm("Tem certeza que deseja excluir sua conta?")) {
+    fetch(`/usuarios/{{ usuario.username }}`, {
+      method: 'DELETE',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({tipo: 'privado'})
+    }).then(res => res.json()).then(res => {
+      if (res.success) {
+        alert('Conta removida. Você será deslogado.');
+        window.location.href = '/logout';
+      } else {
+        alert(res.message);
+      }
+    });
+  }
+}
+</script>
+{% endblock %}

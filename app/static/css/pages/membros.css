@@ -1,0 +1,212 @@
+/* Container das abas */
+.tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: var(--spacing-unit);
+  flex-wrap: wrap;
+}
+
+/* Botões das abas */
+.tab-btn {
+  padding: 0.6rem 1.2rem;
+  background-color: var(--background-soft);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  border-radius: 999px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+
+.tab-btn:hover {
+  background-color: var(--primary-color);
+  color: var(--btn-primary-text);
+  transform: scale(1.03);
+}
+
+/* Aba ativa */
+.tab-btn.active {
+  background-color: var(--primary-color);
+  color: var(--btn-primary-text);
+  border-color: var(--primary-color);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+/* Conteúdo das abas */
+.tab-pane {
+  display: none;
+  padding-top: 1rem;
+}
+
+.tab-pane.active {
+  display: block;
+}
+
+/* Campos de entrada */
+.input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.75rem;
+  background-color: var(--background-soft);
+  color: var(--text-dark);
+  font-size: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(26, 13, 66, 0.2); /* leve brilho primário */
+}
+
+/* Botões base */
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Botão primário */
+.btn-primary {
+  background-color: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
+}
+
+.btn-primary:hover {
+  background-color: #100638; /* tom mais escuro do primary */
+  transform: scale(1.02);
+}
+
+/* Botão de perigo (excluir conta) */
+.btn-danger {
+  background-color: var(--danger-color);
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #b91c1c; /* tom mais escuro do danger */
+  transform: scale(1.02);
+}
+
+/* Espaçamento do formulário */
+form.space-y-4 > div {
+  margin-bottom: 1rem;
+}
+
+form label {
+  display: block;
+  margin-bottom: 0.25rem;
+  color: var(--text-dark);
+  font-weight: 600;
+}
+
+
+
+/* === ANIVERSARIANTES (Calendário) === */
+.main-content {
+    min-height: 80vh;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: var(--background-card);
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* Calendário */
+.calendar {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.calendar h2 {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.mes-bloco {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 colunas para meses */
+    gap: 1.5rem;
+}
+
+.dia-bloco {
+    background-color: var(--background-soft);
+    border: 1px solid var(--border-color);
+    padding: var(--spacing-unit);
+    border-radius: 0.5rem;
+}
+
+.dia-bloco strong {
+    display: block;
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.aniversariante-card {
+    background-color: var(--background-card);
+    padding: var(--spacing-unit);
+    margin-top: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    transition: background-color 0.3s ease;
+}
+
+.aniversariante-card:hover {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+.aniversariante-card p {
+    margin: 0;
+    font-size: 1rem;
+}
+
+
+/* === MEMBROS (Info dos Membros) === */
+.membro-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.membro-card {
+  padding: 1.5rem;
+  border-radius: 1rem;
+  background-color: var(--background-card);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+  border-left: 6px solid var(--primary-color);
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.membro-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.membro-card h3 {
+  font-size: 1.2rem;
+  color: var(--primary-color);
+  margin-bottom: 0.8rem;
+}
+
+.membro-card p {
+  margin-bottom: 0.5rem;
+  color: var(--text-light);
+  font-size: 0.95rem;
+}
+
+.membro-card p strong {
+  color: var(--text-dark);
+}

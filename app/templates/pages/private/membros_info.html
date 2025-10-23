@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %} MEMBROS {% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pages/membros.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<h2 class="text-xl mb-4">Informações dos Membros</h2>
+<div class="bg-white dark:bg-zinc-800 p-4 rounded-xl shadow-sm membro-card">
+  {% for user in usuarios %}
+    <div class="bg-white dark:bg-zinc-800 p-4 rounded-xl shadow-sm">
+      <h3 class="font-bold text-lg">{{ user.nome_completo }}</h3>
+      <p>📍 {{ user.endereco }}</p>
+      <p>📞 {{ user.telefone }}</p>
+      <p>🚨 Contato de Emergência: {{ user.contato_emergencia }}</p>
+      <p>📧 {{ user.email }}</p>
+    </div>
+  {% endfor %}
+</div>
+
+{% endblock %}

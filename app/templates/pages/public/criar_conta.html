@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% from "macros/forms.jinja2" import render_field, render_submit %}
+
+{% block title %}Cadastro Inicial{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pages/criar_conta.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="register-container">
+    <h1 class="register-title">Criar Conta</h1>
+    
+    <form method="POST" class="register-form">
+        {{ form.hidden_tag() }}
+        
+        {{ render_field(form.username, placeholder="Escolha um nome de usuário") }}
+        {{ render_field(form.nome_completo, placeholder="Nome completo") }}
+        {{ render_field(form.data_nascimento, type="date", placeholder="Data de nascimento") }}
+        {{ render_field(form.telefone, placeholder="Telefone (com DDD)") }}
+        {{ render_field(form.instagram, placeholder="@instagram (opcional)") }}
+        {{ render_field(form.email, placeholder="Seu melhor email") }}
+        {{ render_field(form.contato_emergencia, placeholder="Nome e telefone de emergência") }}
+        {{ render_field(form.endereco, placeholder="Endereço (opcional)") }}
+        {{ render_field(form.password, placeholder="Crie uma senha segura", type="password") }}
+        {{ render_field(form.confirm, placeholder="Repita a senha", type="password") }}
+
+        
+        <div class="form-footer">
+            {{ render_submit('Solicitar Cadastro') }}
+            <p class="login-link">
+                Já tem conta? <a href="/login" title="Clique para fazer login">Faça login</a>
+            </p>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block js %}
+<script src="{{ url_for('static', filename='js/modules/criar_conta.js') }}"></script>
+{% endblock %}

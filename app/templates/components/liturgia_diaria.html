@@ -1,0 +1,92 @@
+<div class="liturgia-modal" id="liturgia-modal">
+    <div class="liturgia-content">
+        <button class="liturgia-close-btn" id="liturgia-close-btn">&times;</button>
+        
+        {% if error %}
+            <div class="liturgia-error">
+                <h3>Não foi possível carregar a liturgia do dia</h3>
+                <p>Por favor, tente novamente mais tarde.</p>
+            </div>
+        {% else %}
+            <div class="liturgia-header">
+                <h2 class="liturgia-title">{{ liturgia.liturgia }}</h2>
+                <p class="liturgia-date">{{ liturgia.data }}</p>
+            </div>
+            
+            <div class="liturgia-body">
+                <div class="liturgia-section">
+                    <h3 class="section-title">Orações</h3>
+                    <div class="prayer">
+                        <h4>Coleta</h4>
+                        <p>{{ liturgia.oracoes.coleta }}</p>
+                    </div>
+                    {% if liturgia.oracoes.oferendas %}
+                    <div class="prayer">
+                        <h4>Oferendas</h4>
+                        <p>{{ liturgia.oracoes.oferendas }}</p>
+                    </div>
+                    {% endif %}
+                    <div class="prayer">
+                        <h4>Comunhão</h4>
+                        <p>{{ liturgia.oracoes.comunhao }}</p>
+                    </div>
+                </div>
+                
+                <div class="liturgia-section">
+                    <h3 class="section-title">Leituras</h3>
+                    {% if liturgia.leituras.primeira %}
+                    <div class="reading">
+                        <h4>Primeira Leitura</h4>
+                        {% for texto in liturgia.leituras.primeira %}
+                            <p>{{ texto }}</p>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    
+                    {% if liturgia.leituras.salmo %}
+                    <div class="reading">
+                        <h4>Salmo</h4>
+                        {% for texto in liturgia.leituras.salmo %}
+                            <p>{{ texto }}</p>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    
+                    {% if liturgia.leituras.segunda %}
+                    <div class="reading">
+                        <h4>Segunda Leitura</h4>
+                        {% for texto in liturgia.leituras.segunda %}
+                            <p>{{ texto }}</p>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    
+                    <div class="reading">
+                        <h4>Evangelho</h4>
+                        {% for texto in liturgia.leituras.evangelho %}
+                            <p>{{ texto }}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+                
+                {% if liturgia.antifonas.entrada or liturgia.antifonas.comunhao %}
+                <div class="liturgia-section">
+                    <h3 class="section-title">Antífonas</h3>
+                    {% if liturgia.antifonas.entrada %}
+                    <div class="antiphon">
+                        <h4>Entrada</h4>
+                        <p>{{ liturgia.antifonas.entrada }}</p>
+                    </div>
+                    {% endif %}
+                    {% if liturgia.antifonas.comunhao %}
+                    <div class="antiphon">
+                        <h4>Comunhão</h4>
+                        <p>{{ liturgia.antifonas.comunhao }}</p>
+                    </div>
+                    {% endif %}
+                </div>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+</div>
