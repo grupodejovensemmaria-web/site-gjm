@@ -3,6 +3,8 @@ from werkzeug.exceptions import HTTPException
 from app import app
 from datetime import datetime, date
 import requests
+import json
+import os
 
 def get_liturgia_data(dia: str = None) -> dict:
     """
@@ -144,3 +146,91 @@ def handle_error(e=None):
         'method': request.method
     }
     return render_template('pages/public/error.html', error=error_info), error_info['code']
+
+# Arquivo para armazenar as intenções (em produção, use um banco de dados)
+INTENCOES_FILE = 'data/intencoes.json'
+
+def carregar_intencoes():
+    """Carrega as intenções do arquivo JSON"""
+    try:
+        if os.path.exists(INTENCOES_FILE):
+            with open(INTENCOES_FILE, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        return []
+    except Exception as e:
+        app.logger.error(f"Erro ao carregar intenções: {str(e)}")
+        return []
+
+def salvar_intencoes(intencoes):
+    """Salva as intenções no arquivo JSON"""
+    try:
+        os.makedirs(os.path.dirname(INTENCOES_FILE), exist_ok=True)
+        with open(INTENCOES_FILE, 'w', encoding='utf-8') as f:
+            json.dump(intencoes, f, ensure_ascii=False, indent=2)
+        return True
+    except Exception as e:
+        app.logger.error(f"Erro ao salvar intenções: {str(e)}")
+        return False
+
+@app.route('/api/intencoes', methods=['GET', 'POST'])
+def api_intencoes():
+    """API para gerenciar intenções de oração"""
+    try:
+        if request.method == 'GET':
+            # Retorna todas as intenções (ordenadas por data, mais recentes primeiro)
+            intencoes = carregar_intencoes()
+            intencoes.sort(key=lambda x: x['data'], reverse=True)
+            return jsonify(intencoes)
+        
+        elif request.method == 'POST':
+            # Adiciona nova intenção
+            data = request.get_json()
+            
+            if not data or 'texto' not in data:
+                return jsonify({'error': 'Texto da intenção é obrigatório'}), 400
+            
+            texto = data['texto'].strip()
+            if len(texto) > 500:
+                return jsonify({'error': 'Intenção muito longa (máximo 500 caracteres)'}), 400
+            
+            # Carregar intenções existentes
+            intencoes = carregar_intencoes()
+            
+            # Nova intenção
+            nova_intencao = {
+                'id': len(intencoes) + 1,
+                'texto': texto,
+                'anonimo': data.get('anonimo', True),
+                'autor': data.get('autor', 'Membro GJM') if not data.get('anonimo', True) else None,
+                'data': datetime.now().isoformat(),
+                'rezados': 0
+            }
+            
+            intencoes.append(nova_intencao)
+            
+            if salvar_intencoes(intencoes):
+                return jsonify(nova_intencao), 201
+            else:
+                return jsonify({'error': 'Erro ao salvar intenção'}), 500
+                
+    except Exception as e:
+        app.logger.error(f"Erro na API de intenções: {str(e)}")
+        return jsonify({'error': 'Erro interno do servidor'}), 500
+
+@app.route('/api/intencoes/<int:intencao_id>/rezar', methods=['POST'])
+def rezar_por_intencao(intencao_id):
+    """Registra que alguém rezou por uma intenção"""
+    try:
+        intencoes = carregar_intencoes()
+        
+        for intencao in intencoes:
+            if intencao['id'] == intencao_id:
+                intencao['rezados'] = intencao.get('rezados', 0) + 1
+                break
+        
+        salvar_intencoes(intencoes)
+        return jsonify({'success': True})
+        
+    except Exception as e:
+        app.logger.error(f"Erro ao registrar oração: {str(e)}")
+        return jsonify({'error': 'Erro interno'}), 500

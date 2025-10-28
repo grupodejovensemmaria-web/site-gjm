@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/components/nav_atos.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/pages/weekly_post.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/pages/liturgia.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pages/intencoes.css') }}">
 {% endblock %}
 
 {% block js %}
@@ -12,6 +13,7 @@
 <script src="{{ url_for('static', filename='js/modules/nav_atos.js') }}" defer></script>
 <script src="{{ url_for('static', filename='js/modules/liturgia.js') }}" defer></script>
 <script src="{{ url_for('static', filename='js/modules/weekly_post.js') }}" defer></script>
+<script src="{{ url_for('static', filename='js/modules/intencoes.js') }}" defer></script>
 {% endblock %}
 
 {% block content %}
@@ -28,6 +30,7 @@
       <a href="#ato-1" class="btn btn-primary start-journey" id="start-journey">Conhecer Deus</a>
       <a id="liturgiadiaria-btn" class="btn btn-primary">Ver Liturgia Diária</a>
       <a id="show-weekly-post-btn" class="btn btn-primary">Ver Santo da Semana</a>
+      <a id="intencoes-btn" class="btn btn-primary">Intenções da comunidade GJM</a>
       <a href="/login" class="btn btn-outline">Venha ser de Deus</a>
     </div>
   </div>
@@ -118,6 +121,50 @@
         
         <div class="liturgia-actions">
             <button id="close-liturgia-btn" class="btn btn-secondary">Fechar</button>
+        </div>
+    </div>
+</section>
+
+<!-- Modal de Intenções -->
+<section class="intencoes-section" id="intencoes-modal">
+    <div class="container">
+        <div class="intencoes-header">
+            <h2 class="intencoes-title">Intenções da comunidade GJM</h2>
+            <button id="close-intencoes-btn" class="btn-close">×</button>
+        </div>
+        
+        <div class="intencoes-content">
+            <!-- Formulário para nova intenção -->
+            <div class="nova-intencao-card">
+                <h3>Coloque sua intenção de oração</h3>
+                <form id="form-intencao" class="form-intencao">
+                    <div class="form-group">
+                        <label for="intencao-texto">Sua intenção:</label>
+                        <textarea id="intencao-texto" name="intencao" 
+                                  placeholder="Escreva aqui seu pedido de oração..." 
+                                  required maxlength="500"></textarea>
+                        <div class="char-count"><span id="char-count">0</span>/500</div>
+                    </div>
+                    
+                    <div class="form-group checkbox-group">
+                        <input disabled type="checkbox" id="mostrar-nome" name="mostrar_nome">
+                        <label for="mostrar-nome">Quero que meu nome apareça</label>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-enviar">
+                        Enviar Intenção
+                    </button>
+                </form>
+            </div>
+            
+            <!-- Lista de intenções -->
+            <div class="intencoes-list">
+                <h3>Intenções da comunidade</h3>
+                <div id="lista-intencoes" class="lista-intencoes">
+                    <!-- Intenções serão carregadas aqui via JavaScript -->
+                    <div class="loading">Carregando intenções...</div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
